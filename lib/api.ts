@@ -7,7 +7,7 @@ const api = axios.create({
   baseURL: "https://notehub-public.goit.study/api",
   headers: {
     common: {
-      Authorization: API_TOKEN,
+      Authorization: `Bearer ${API_TOKEN}`,
     },
   },
 });
@@ -19,7 +19,7 @@ interface GetNotesResponse {
 
 export async function getNotes(
   query: string,
-  tag: NoteTag,
+  tag?: NoteTag,
   page?: number,
   perPage?: number
 ): Promise<GetNotesResponse> {
