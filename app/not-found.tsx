@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     url: "https://vercel.com/eddniks-projects/08-zustand/404",
     images: [
       {
-        url: "/notehub-og-meta.jpg",
-        // url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        // url: "/notehub-og-meta.jpg",
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
         width: 1200,
         height: 630,
         alt: "Page not found",
