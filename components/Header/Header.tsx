@@ -3,7 +3,7 @@ import css from "./Header.module.css";
 
 function Header() {
   return (
-    <header>
+    <header className={css.header}>
       <Link href="/" aria-label="Home" className={css.headerLink}>
         NoteHub
       </Link>

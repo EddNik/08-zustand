@@ -12,7 +12,7 @@ export default function Home() {
           width={500}
           height={300}
           // fill
-          style={{ position: "absolute", top: "100%", right: "30%" }}
+          style={{ position: "absolute", top: "150%", right: "30%" }}
         />
         <p className={css.description}>
           NoteHub is a simple and efficient application designed for managing
