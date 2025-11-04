@@ -1,6 +1,6 @@
 "use client";
 import { getNotes } from "@/lib/api";
-import { Note, NoteTag } from "@/types/note";
+import { NoteTag } from "@/types/note";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -12,6 +12,7 @@ import Pagination from "@/components/Pagination/Pagination";
 import Loader from "@/app/loading";
 import Error from "../../../error";
 import NoteList from "@/components/NoteList/NoteList";
+
 function NotesByTagClient({ tag }: { tag?: NoteTag }) {
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
@@ -19,7 +20,7 @@ function NotesByTagClient({ tag }: { tag?: NoteTag }) {
 
   const { data, isError, isLoading, error, isSuccess } = useQuery({
     queryKey: ["notes", tag, page, debouncedQuery],
-    queryFn: () => getNotes(debouncedQuery, tag, page, 12),
+    queryFn: () => getNotes(debouncedQuery, tag, page),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
   });

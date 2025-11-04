@@ -17,6 +17,7 @@ function SearchBox({ query, setQuery }: SearchBoxProps) {
       <button
         type="button"
         className={clsx(css.btnClear, query && css.btnClearVisible)}
+        onClick={() => setQuery("")}
       >
         Cancel
       </button>

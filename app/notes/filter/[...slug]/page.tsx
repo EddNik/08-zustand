@@ -9,9 +9,6 @@ import { getNotes } from "@/lib/api";
 
 async function NotesByTag({ params }: { params: Promise<{ slug: string[] }> }) {
   const queryClient = new QueryClient();
-
-  console.log(params);
-
   const slug = (await params).slug;
 
   const tag = slug[0] === "all" ? undefined : (slug[0] as NoteTag);
