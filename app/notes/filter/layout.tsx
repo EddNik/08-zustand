@@ -6,7 +6,7 @@ interface NotesLayoutProps {
   sidebar: ReactNode;
 }
 
-function NotesLayout({ children, sidebar }: NotesLayoutProps) {
+function NotesLayout({ children }: NotesLayoutProps) {
   return (
     <section className={css.container}>
       {/* <aside className={css.sidebar}>{sidebar}</aside> */}
