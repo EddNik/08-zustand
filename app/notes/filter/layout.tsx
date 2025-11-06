@@ -9,7 +9,7 @@ interface NotesLayoutProps {
 function NotesLayout({ children, sidebar }: NotesLayoutProps) {
   return (
     <section className={css.container}>
-      <aside className={css.sidebar}>{sidebar}</aside>
+      {/* <aside className={css.sidebar}>{sidebar}</aside> */}
       <div className={css.notesWrapper}>{children}</div>
     </section>
   );
