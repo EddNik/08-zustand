@@ -1,4 +1,4 @@
-import { Note, NoteTag } from "@/types/note";
+import { NewNote, Note, NoteTag } from "@/types/note";
 import axios from "axios";
 
 const API_TOKEN = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
@@ -40,7 +40,7 @@ export async function getNotes(
   }
 }
 
-export async function createNote(newNote: Note): Promise<Note> {
+export async function createNote(newNote: NewNote): Promise<Note> {
   try {
     const { data } = await api.post<Note>("/notes", newNote);
     return data;

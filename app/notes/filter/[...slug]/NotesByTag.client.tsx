@@ -22,7 +22,7 @@ function NotesByTagClient({ tag }: { tag?: NoteTag }) {
     queryKey: ["notes", tag, page, debouncedQuery],
     queryFn: () => getNotes(debouncedQuery, tag, page),
     placeholderData: keepPreviousData,
-    refetchOnMount: false,
+    // refetchOnMount: false,
   });
 
   const notes = data?.notes ?? [];
@@ -54,7 +54,7 @@ function NotesByTagClient({ tag }: { tag?: NoteTag }) {
               setPage={setPage}
             />
           )}
-          <Link href={"notes/action/create"} className={css.button}>
+          <Link href="/notes/action/create" className={css.button}>
             Create note +
           </Link>
         </header>
