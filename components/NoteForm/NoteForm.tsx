@@ -18,7 +18,6 @@ function NoteForm() {
     mutationFn: createNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
-      // router.push("/notes/filter/all");
       router.back();
       clearDraft();
     },
@@ -53,7 +52,6 @@ function NoteForm() {
   }
 
   const handleCancel = () => {
-    // router.push("/notes/filter/all");
     router.back();
   };
 

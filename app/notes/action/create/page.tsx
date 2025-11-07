@@ -24,7 +24,6 @@ function CreateNote() {
     <main className={css.main}>
       <div className={css.container}>
         <h1 className={css.title}>Create a new note</h1>
-        {/* <h1 className={css.title}>Create new note</h1> */}
         <NoteForm />
       </div>
     </main>
