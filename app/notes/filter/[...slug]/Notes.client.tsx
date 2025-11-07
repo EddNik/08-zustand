@@ -13,7 +13,7 @@ import Loader from "@/app/loading";
 import Error from "@/app/error";
 import NoteList from "@/components/NoteList/NoteList";
 
-function NotesByTagClient({ tag }: { tag?: NoteTag }) {
+function NotesClient({ tag }: { tag?: NoteTag }) {
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [debouncedQuery] = useDebounce(query, 500);
@@ -76,4 +76,4 @@ function NotesByTagClient({ tag }: { tag?: NoteTag }) {
   );
 }
 
-export default NotesByTagClient;
+export default NotesClient;
