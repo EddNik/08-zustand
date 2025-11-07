@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getNoteById } from "@/lib/api";
 import { useRouter } from "next/navigation";
 import Loader from "@/app/loading";
-import Error from "@/app/error";
+import Error from "./error";
 
 function NoteDetailsClient() {
   const router = useRouter();
