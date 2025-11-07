@@ -2,7 +2,7 @@
 import { getNotes } from "@/lib/api";
 import { NoteTag } from "@/types/note";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { useDebounce } from "use-debounce";
 import css from "./NotesPage.module.css";
@@ -10,7 +10,7 @@ import Link from "next/link";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
 import Loader from "@/app/loading";
-import Error from "../../../error";
+import Error from "@/app/error";
 import NoteList from "@/components/NoteList/NoteList";
 
 function NotesByTagClient({ tag }: { tag?: NoteTag }) {
@@ -22,18 +22,23 @@ function NotesByTagClient({ tag }: { tag?: NoteTag }) {
     queryKey: ["notes", tag, page, debouncedQuery],
     queryFn: () => getNotes(debouncedQuery, tag, page),
     placeholderData: keepPreviousData,
-    // refetchOnMount: false,
   });
 
   const notes = data?.notes ?? [];
   const totalPages = data?.totalPages ?? 0;
 
+  const toastShown = useRef(false);
+
   useEffect(() => {
+    if (toastShown.current) return;
     if (isError) {
       toast.error(error.message);
+      toastShown.current = true;
     }
+
     if (isSuccess && data.notes.length === 0) {
       toast.error("No notes found for your request");
+      toastShown.current = true;
     }
   }, [isError, isSuccess, error, data]);
 

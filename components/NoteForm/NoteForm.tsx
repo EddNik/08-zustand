@@ -1,3 +1,4 @@
+"use client";
 import css from "./NoteForm.module.css";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "@/lib/api";
@@ -17,7 +18,8 @@ function NoteForm() {
     mutationFn: createNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] });
-      router.push("/notes/filter/all");
+      // router.push("/notes/filter/all");
+      router.back();
       clearDraft();
     },
     onError: (error) => {
@@ -51,7 +53,8 @@ function NoteForm() {
   }
 
   const handleCancel = () => {
-    router.push("/notes/filter/all");
+    // router.push("/notes/filter/all");
+    router.back();
   };
 
   return (
