@@ -50,7 +50,7 @@ export default function RootLayout({
         <TanStackProvider>
           <Header />
           {children}
-          {/* {modal} */}
+          {modal}
           <Footer />
           <ReactQueryDevtools initialIsOpen={false} />
         </TanStackProvider>
