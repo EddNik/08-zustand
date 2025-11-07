@@ -1,26 +1,37 @@
 "use client";
-
 import { useParams } from "next/navigation";
-import css from "./NoteDetails.module.css";
+import css from "./NotePreview.module.css";
+import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getNoteById } from "@/lib/api";
-import { useRouter } from "next/navigation";
+import { Note } from "@/types/note";
 import Loader from "@/app/loading";
 import Error from "@/app/error";
+import Modal from "@/components/Modal/Modal";
 
-function NoteDetailsClient() {
-  const router = useRouter();
+function NotePreviewClient() {
   const { id } = useParams<{ id: string }>();
+
+  const router = useRouter();
+
   const {
     data: note,
-    isError,
     isLoading,
+    isError,
     error,
-  } = useQuery({
+  } = useQuery<Note>({
     queryKey: ["note", id],
     queryFn: () => getNoteById(id),
     refetchOnMount: false,
   });
+
+  if (isLoading) return <Loader />;
+
+  if (isError) return <Error error={error} />;
+
+  const onClose = () => {
+    router.back();
+  };
 
   const formatDate = (isoDate: string) => {
     return new Date(isoDate).toLocaleString("en-UA", {
@@ -32,19 +43,10 @@ function NoteDetailsClient() {
     });
   };
 
-  const handleGoBack = () => {
-    const isSure = confirm("Are you sure?");
-    if (isSure) {
-      router.back();
-    }
-  };
-
   return (
-    <>
-      {isLoading && <Loader />}
-      {isError && <Error error={error} />}
-      {note && (
-        <div className={css.container}>
+    <Modal onClose={onClose}>
+      <div className={css.container}>
+        {note && (
           <div className={css.item}>
             <div className={css.header}>
               <h2>{note.title}</h2>
@@ -52,14 +54,14 @@ function NoteDetailsClient() {
             <p className={css.content}>{note.content}</p>
             <p className={css.tag}>{note.tag}</p>
             <p className={css.date}>{formatDate(note.createdAt)}</p>
-            <button className={css.backBtn} onClick={handleGoBack}>
-              Back
-            </button>
           </div>
-        </div>
-      )}
-    </>
+        )}
+        <button onClick={onClose} type="button" className={css.cancelButton}>
+          Back
+        </button>
+      </div>
+    </Modal>
   );
 }
 
-export default NoteDetailsClient;
+export default NotePreviewClient;

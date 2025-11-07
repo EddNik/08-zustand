@@ -37,17 +37,18 @@ export async function generateMetadata({
 }
 
 async function NoteDetails({ params }: NoteDetailsProps) {
-  //   const queryClient = new QueryClient();
-  //   const id = (await params).id;
+  const queryClient = new QueryClient();
+  const id = (await params).id;
 
-  //   await queryClient.prefetchQuery({
-  //     queryKey: ["note", id],
-  //     queryFn: () => getNoteById(id),
-  //   });
+  await queryClient.prefetchQuery({
+    queryKey: ["note", id],
+    queryFn: () => getNoteById(id),
+  });
 
-  return null;
-  // <HydrationBoundary state={dehydrate(queryClient)}>
-  //   <NoteDetailsClient />
-  // </HydrationBoundary>
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <NoteDetailsClient />
+    </HydrationBoundary>
+  );
 }
 export default NoteDetails;
