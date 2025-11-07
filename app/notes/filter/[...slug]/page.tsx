@@ -4,7 +4,7 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import NotesByTagClient from "./Notes.client";
+import NotesClient from "./Notes.client";
 import { getNotes } from "@/lib/api";
 import { Metadata } from "next";
 
@@ -50,7 +50,7 @@ async function NotesByTag({ params }: { params: Promise<{ slug: string[] }> }) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <NotesByTagClient tag={tag} />
+      <NotesClient tag={tag} />
     </HydrationBoundary>
   );
 }
