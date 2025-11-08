@@ -10,24 +10,22 @@ import Link from "next/link";
 import SearchBox from "@/components/SearchBox/SearchBox";
 import Pagination from "@/components/Pagination/Pagination";
 import Loader from "@/app/loading";
-import Error from "@/app/error";
 import NoteList from "@/components/NoteList/NoteList";
 
 function NotesClient({ tag }: { tag?: NoteTag }) {
   const [query, setQuery] = useState<string>("");
   const [page, setPage] = useState<number>(1);
   const [debouncedQuery] = useDebounce(query, 500);
+  const toastShown = useRef(false);
 
   const { data, isError, isLoading, error, isSuccess } = useQuery({
-    queryKey: ["notes", tag, page, debouncedQuery],
+    queryKey: ["notes", debouncedQuery, tag, page],
     queryFn: () => getNotes(debouncedQuery, tag, page),
     placeholderData: keepPreviousData,
   });
 
   const notes = data?.notes ?? [];
   const totalPages = data?.totalPages ?? 0;
-
-  const toastShown = useRef(false);
 
   useEffect(() => {
     if (toastShown.current) return;
@@ -41,6 +39,10 @@ function NotesClient({ tag }: { tag?: NoteTag }) {
       toastShown.current = true;
     }
   }, [isError, isSuccess, error, data]);
+
+  useEffect(() => {
+    toastShown.current = false;
+  }, [query, page]);
 
   function handleQuery(newQuery: string) {
     setQuery(newQuery);
@@ -67,7 +69,6 @@ function NotesClient({ tag }: { tag?: NoteTag }) {
 
       <main>
         {isLoading && <Loader />}
-        {isError && <Error error={error} />}
         {!isLoading && !isError && notes.length > 0 && (
           <NoteList notes={notes} />
         )}
