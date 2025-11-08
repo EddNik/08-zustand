@@ -24,7 +24,7 @@ export async function generateMetadata({
       title: `${tag} notes`,
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, nam, repellat eos reprehenderit, eaque quasi pariatur asperiores dolorum odit enim placeat! Cupiditate, iste sint? Quod magni id quibusdam modi earum.",
-      url: `https://08-zustand-blond-seven.vercel.app/${tag}`,
+      url: `https://08-zustand-blond-seven.vercel.app/notes/filter/${tag}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
